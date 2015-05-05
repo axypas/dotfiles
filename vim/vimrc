@@ -1,0 +1,201 @@
+" NEO BUNDLE INSTALL
+" Note: Skip initialization for vim-tiny or vim-small.
+ if !1 | finish | endif
+
+ if has('vim_starting')
+   if &compatible
+     set nocompatible               " Be iMproved
+   endif
+
+   " Required:
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
+
+ " Required:
+ call neobundle#begin(expand('~/.vim/bundle/'))
+
+ " Let NeoBundle manage NeoBundle
+ " Required:
+ NeoBundleFetch 'Shougo/neobundle.vim'
+
+ " My Bundles here:
+ " Refer to |:NeoBundle-examples|.
+ " Note: You don't set neobundle setting in .gvimrc!
+"NeoBundle 'Shougo/vimproc', { 'build' : {
+    "\       'mac': 'make -f make_mac.mak',
+    "\       'unix' : 'make -f make_unix.mak',
+    "\   },
+    "\}
+"NeoBundle 'Shougo/unite.vim', {
+            "\ 'autoload' : {
+            "\   'commands' : [{'name' : 'Unite'},
+            "\       'UniteWithBufferDir']
+            "\   }
+            "\ }
+
+" NeoBundleLazy 'junegunn/fzf'
+NeoBundle 'tacahiroy/ctrlp-funky'
+NeoBundle 'rking/ag.vim'                    " search in local files :Ag
+NeoBundle 'airblade/vim-gitgutter'          " show git changes with signs
+NeoBundle 'tpope/vim-fugitive'
+
+NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight 
+" A fork of desert256.vim aims to make it a bit warm and more friendly for
+" my eyes.
+" NeoBundle 'rainux/vim-desert-warm-256'
+NeoBundle 'sickill/vim-monokai'
+" A slightly-modified desert theme, for 88- and 256-color xterms
+" NeoBundle 'vim-scripts/desert256.vim'
+" NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'mxw/vim-jsx' " Syntax highlighting and indenting for JSX
+NeoBundle 'marijnh/tern_for_vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'Valloric/YouCompleteMe'
+", {
+"     \ 'build'      : {
+"        \ 'unix'    : './install.sh ',
+"        \ }
+"     \ }
+NeoBundle 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}} 
+NeoBundle 'scrooloose/syntastic'
+" NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'elzr/vim-json'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'tpope/vim-surround'
+
+" NeoBundle 'mattn/webapi-vim'
+" NeoBundle 'heavenshell/vim-slack'
+
+call neobundle#end()
+" If there are uninstalled bundles found on startup,
+"  " this will conveniently prompt you to install them.
+NeoBundleCheck
+
+let g:neobundle#install_process_timeout = 1500
+
+:let mapleader = ","
+"let g:unite_source_file_rec_max_cache_files = 0
+"call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+            "\ 'max_candidates', 0)
+"
+"" slow to start
+"nnoremap <C-t> :Unite -start-insert file_rec/async<cr> 
+
+set backspace=2         " backspace in insert mode works like normal editor
+
+syntax on               " syntax highlighting
+filetype on
+filetype indent on      " activates indenting for files
+filetype plugin  on      " activates indenting for files
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
+set autoindent          " auto indenting
+set number              " line numbers
+set t_Co=256 " Enable high-color
+colorscheme monokai 
+" colorscheme desert-warm-256   " colorscheme desert
+" set nobackup            " get rid of anoying ~file
+
+" Override the gitgutter sign column color
+hi SignColumn            ctermbg=235
+hi GitGutterAdd          ctermbg=235 ctermfg=green  cterm=none
+hi GitGutterChange       ctermbg=235 ctermfg=yellow cterm=none
+hi GitGutterDelete       ctermbg=235 ctermfg=red    cterm=none
+hi GitGutterChangeDelete ctermbg=235 ctermfg=red    cterm=none
+let g:gitgutter_max_signs=5000
+
+" Make gitgutter run less so it doesn't lag vim
+let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
+" let g:gitgutter_highlight_lines = 1
+set updatetime=150
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+" The Silver Searcher
+" http://robots.thoughtbot.com/faster-grepping-in-vim
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag -l --nocolor -g "" %s'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+" let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
+" These are the tweaks I apply to YCM's config, you don't need them but they
+" might help.
+" " YCM gives you popups and splits by default that some people might not
+" like, so these should tidy it up a bit for you.
+let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
+
+" set omnifunc=syntaxcomplete#Complete
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+" old way JSHint with JSX
+let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+let g:syntastic_javascript_checkers = ['jsxhint']
+"let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react 
+
+" recommended settings for syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+"let g:jsx_ext_required = 0 " jsx in js files allowed
+
+
+let g:airline#extensions#tabline#enabled = 1
+
+
+:nnoremap <S-PageUp> :bprevious<CR>
+:nnoremap <S-PageDown> :bnext<CR>
+:noremap <C-Right> <C-W><Right>
+:noremap <C-Left> <C-W><Left>
+:noremap <F5> :NERDTreeToggle<CR>
+
+
+au BufRead,BufNewFile *.md set filetype=markdown
+
+set hlsearch
+set incsearch
+
+set relativenumber
+
+highlight javascriptOpSymbols ctermfg=159 guifg=#afffff
+highlight javascriptParens ctermfg=193 guifg=#d7ffaf
+
+
+" F3 calls TernDef
+noremap <F3> :TernDef<CR>
+
+
+" let g:tern_show_signature_in_pum=1 "  display function signatures in the completion menu
+" let g:tern_show_argument_hints='on_hold'
+
+" let g:slack_channels = {
+" \ '#apostolis': 'https://hooks.slack.com/services/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',
+"   \ '#labs': 'https://hooks.slack.com/services/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'
+"   \}
+
