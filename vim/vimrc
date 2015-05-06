@@ -34,31 +34,6 @@
             "\ }
 
 " NeoBundleLazy 'junegunn/fzf'
-NeoBundle 'tacahiroy/ctrlp-funky'
-NeoBundle 'rking/ag.vim'                    " search in local files :Ag
-NeoBundle 'airblade/vim-gitgutter'          " show git changes with signs
-NeoBundle 'tpope/vim-fugitive'
-
-NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight 
-" A fork of desert256.vim aims to make it a bit warm and more friendly for
-" my eyes.
-" NeoBundle 'rainux/vim-desert-warm-256'
-NeoBundle 'sickill/vim-monokai'
-" A slightly-modified desert theme, for 88- and 256-color xterms
-" NeoBundle 'vim-scripts/desert256.vim'
-" NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'mxw/vim-jsx' " Syntax highlighting and indenting for JSX
-NeoBundle 'marijnh/tern_for_vim'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Valloric/YouCompleteMe'
-", {
-"     \ 'build'      : {
-"        \ 'unix'    : './install.sh ',
-"        \ }
-"     \ }
-NeoBundle 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}} 
-NeoBundle 'scrooloose/syntastic'
-" NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'elzr/vim-json'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'scrooloose/nerdtree'
