@@ -50,12 +50,11 @@ NeoBundle 'sickill/vim-monokai'
 NeoBundle 'mxw/vim-jsx' " Syntax highlighting and indenting for JSX
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Valloric/YouCompleteMe'
-", {
-"     \ 'build'      : {
-"        \ 'unix'    : './install.sh ',
-"        \ }
-"     \ }
+" NeoBundle 'Valloric/YouCompleteMe', {
+"      \ 'build'      : {
+"         \ 'unix'    : './install.sh ',
+"         \ }
+"      \ }
 NeoBundle 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}} 
 NeoBundle 'scrooloose/syntastic'
 " NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
@@ -98,7 +97,7 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 set autoindent          " auto indenting
 set number              " line numbers
 set t_Co=256 " Enable high-color
-colorscheme monokai 
+" colorscheme monokai 
 " colorscheme desert-warm-256   " colorscheme desert
 " set nobackup            " get rid of anoying ~file
 
