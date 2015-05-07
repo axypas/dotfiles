@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/axypas/workspace/react-jquery'
-let g:netrw_dirhist_2='/home/axypas/workspace/react-jquery/src'
-let g:netrw_dirhist_3='/home/axypas/work/workspace/api/swagger'
-let g:netrw_dirhist_4='scp://git@94.23.2.149:418/'
-let g:netrw_dirhist_5='scp://git@94.23.2.149:418/workspace/'
-let g:netrw_dirhist_6='scp://git@94.23.2.149:418/workspace/MagicTablePlanner/'
-let g:netrw_dirhist_7='scp://git@94.23.2.149:418/workspace/MagicTablePlanner/MagicTablePlanner/'
