@@ -22,8 +22,18 @@ ENV LC_ALL en_US.UTF-8
 RUN chown -R dev:dev $HOME
 USER dev
 
+
 # Setup neobundlepathogen vim plugin manager
-RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh && vim +NeoBundleInstall +qall
+RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh \
+  &&  vim +NeoBundleInstall +qall \
+  && cd ~/.vim/bundle \
+  && git clone https://github.com/Valloric/YouCompleteMe.git \
+  && cd ~/.vim/bundle/YouCompleteMe \
+  && cd ~/.vim/bundle/YouCompleteMe/third_party \
+  && git submodule update --init --recursive \
+  && cd ~/.vim/bundle/YouCompleteMe \
+  && ./install.sh 
+
 ADD vim/vimrc        .vimrc
 
 RUN vim +NeoBundleInstall +qall
