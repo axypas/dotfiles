@@ -23,18 +23,8 @@ RUN chown -R dev:dev $HOME
 USER dev
 
 # Setup neobundlepathogen vim plugin manager
-RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
-
-
+RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh && vim +NeoBundleInstall +qall
 ADD vim/vimrc        .vimrc
-ADD vim/vim          .vim
-
-USER root
-RUN cd $HOME/.vim/bundle/YouCompleteMe &&  git submodule update --init --recursive \
-  && ./install.sh --system-boost
-
-USER dev
 
 RUN vim +NeoBundleInstall +qall
-
 CMD vim
