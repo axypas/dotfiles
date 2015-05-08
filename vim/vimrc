@@ -50,11 +50,12 @@ NeoBundle 'sickill/vim-monokai'
 NeoBundle 'mxw/vim-jsx' " Syntax highlighting and indenting for JSX
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Valloric/YouCompleteMe', {
-      \ 'build'      : {
-         \ 'unix'    : './install.sh ',
-         \ }
-      \ }
+NeoBundle 'Valloric/YouCompleteMe'
+", {
+"      \ 'build'      : {
+"         \ 'unix'    : './install.sh ',
+"         \ }
+"      \ }
 NeoBundle 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}} 
 NeoBundle 'scrooloose/syntastic'
 " NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
