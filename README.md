@@ -12,12 +12,27 @@
 
 ## Docker
   Under dev
- 
-~~~bash
-  docker build  -t axypas/vim-last . 
 
-  docker run -i -t  -v ~/my_workspace:/home/dev/workspace axypas/vim-last
+### Create container your plugins and commit the image
+
+~~~bash
+  docker build  -t axypas/vim . 
+  docker run -i -t -v ~/dotfiles/vim/vimrc:/home/dev/.vimrc axypas/vim
+  
+  # install the vim plugins and commit
+  docker ps -l
+  docker commit <CONTAINER_ID> axypas/vim:with-plugins
+
+  docker push axypas/vim:with-plugins
 ~~~
+
+### Use the image
+
+~~~bash
+  docker run -v ~/home/dev/workspace axypas/vim:with-plugins
+~~~
+
+
 
 ## Markdown preview plugin
 ~~~bash
