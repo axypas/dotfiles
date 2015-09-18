@@ -3,7 +3,7 @@
 ## Install
 
 ~~~bash
-  cd && git clone https://github.com/axypas/dotfiles.git \
+  cd git clone https://github.com/axypas/dotfiles.git \
   && sudo apt-get install zsh \
   && wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh \
   && ln -s dotfiles/zsh/zshrc ~/.zshrc \
