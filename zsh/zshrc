@@ -49,11 +49,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-<<<<<<< HEAD
-  plugins=(gitfast zsh_reload postgres docker zsh-syntax-highlighting httpie autojump)
-=======
   plugins=(gitfast zsh_reload postgres docker autojump zsh-syntax-highlighting httpie)
->>>>>>> b846bee28054fd4d562b4b1454f85a4113591b37
 
 # User configuration
 
