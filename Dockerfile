@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM phusion/baseimage:latest
 
 # environment variables
 ENV DEBIAN_FRONTEND noninteractive
@@ -34,7 +34,16 @@ RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/insta
   && cd ~/.vim/bundle/YouCompleteMe \
   && ./install.sh 
 
-ADD vim/vimrc        .vimrc
+#ADD vim/vimrc        .vimrc
 
-RUN vim +NeoBundleInstall +qall
+USER root
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+USER dev
+
+#RUN vim +NeoBundleInstall +qall
 CMD vim
+
+

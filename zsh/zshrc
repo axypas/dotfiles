@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/axypas/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -49,7 +49,11 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+<<<<<<< HEAD
   plugins=(gitfast zsh_reload postgres docker zsh-syntax-highlighting httpie autojump)
+=======
+  plugins=(gitfast zsh_reload postgres docker autojump zsh-syntax-highlighting httpie)
+>>>>>>> b846bee28054fd4d562b4b1454f85a4113591b37
 
 # User configuration
 
@@ -92,5 +96,8 @@ if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
 fi
 
+# npm wihout sudo:
+#   ``` 
+#     npm config set prefix '~/.npm'
+#   ```
 export PATH="$PATH:$HOME/.npm/bin"
-
