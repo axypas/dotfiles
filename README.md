@@ -3,7 +3,10 @@
 ## Install
 
 ~~~bash
-  cd && git clone https://github.com/axypas/dotfiles.git \
+  cd \
+  && curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh \
+  && sh ./install.sh \
+  && git clone https://github.com/axypas/dotfiles.git \
   && sudo apt-get install zsh \
   && wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh \
   && ln -s dotfiles/zsh/zshrc ~/.zshrc \
