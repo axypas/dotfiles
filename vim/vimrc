@@ -62,6 +62,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-ragtag'
 
 " NeoBundle 'mattn/webapi-vim'
 " NeoBundle 'heavenshell/vim-slack'
