@@ -49,7 +49,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-  plugins=(gitfast zsh_reload postgres docker autojump zsh-syntax-highlighting httpie)
+  plugins=(gitfast zsh_reload postgres docker zsh-syntax-highlighting httpie tmux zsh-syntax-highlighting fasd)
 
 # User configuration
 
@@ -96,4 +96,22 @@ fi
 #   ``` 
 #     npm config set prefix '~/.npm'
 #   ```
-export PATH="$PATH:$HOME/.npm/bin"
+#export PATH="$PATH:$HOME/.npm/bin"
+
+export PATH="$PATH:$HOME/work/software/node-v4.4.0-linux-x64/bin"
+export PATH="$PATH:$HOME/bin"
+export NODE_ENV=development
+
+export NVM_DIR="/home/axypas/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+eval "$(fasd --init auto)"
+
+alias v='f -e vim' # quick opening files with vim
+alias m='f -e mplayer' # quick opening files with mplayer
+alias o='a -e xdg-open' # quick opening files with xdg-open
+
+
+# tabtab source for yo package
+# uninstall by removing these lines or running `tabtab uninstall yo`
+[[ -f /home/axypas/.nvm/versions/node/v4.4.4/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /home/axypas/.nvm/versions/node/v4.4.4/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
