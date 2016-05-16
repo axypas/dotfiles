@@ -47,7 +47,7 @@ NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight
 NeoBundle 'sickill/vim-monokai'
 " A slightly-modified desert theme, for 88- and 256-color xterms
 " NeoBundle 'vim-scripts/desert256.vim'
-" NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
+NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'mxw/vim-jsx' " Syntax highlighting and indenting for JSX
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'SirVer/ultisnips'
@@ -64,6 +64,12 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-ragtag'
 
+NeoBundle 'ternjs/tern_for_vim'
+NeoBundle 'moll/vim-node'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
+NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
+
 " NeoBundle 'mattn/webapi-vim'
 " NeoBundle 'heavenshell/vim-slack'
 
@@ -78,6 +84,13 @@ let g:neobundle#log_filename=expand('~/.vim/plugin_install.log')
 let g:neobundle#types#git#enable_submodule = 0
 let g:neobundle#install_max_processes = 4
 
+" Emmet plugin
+" Example: html:5    C-Y ,
+" Don't forget the comma
+" https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-Y>'
 
 :let mapleader = ","
 "let g:unite_source_file_rec_max_cache_files = 0
@@ -93,6 +106,8 @@ syntax on               " syntax highlighting
 filetype on
 filetype indent on      " activates indenting for files
 filetype plugin  on      " activates indenting for files
+
+set clipboard=unnamedplus " use the system clipboard when copy
 
 :silent! colorscheme monokai "silent if plugin not yet installed
 
