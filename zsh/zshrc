@@ -115,3 +115,5 @@ alias o='a -e xdg-open' # quick opening files with xdg-open
 # tabtab source for yo package
 # uninstall by removing these lines or running `tabtab uninstall yo`
 [[ -f /home/axypas/.nvm/versions/node/v4.4.4/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /home/axypas/.nvm/versions/node/v4.4.4/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
+
+alias xclip="xclip -selection c" # example : echo test | xclip
