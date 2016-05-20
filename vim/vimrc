@@ -71,13 +71,23 @@ NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
 NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
 
 " NeoBundle 'mattn/webapi-vim'
-" NeoBundle 'heavenshell/vim-slack'
+NeoBundle 'mbbill/undotree'
+NeoBundle 'tmhedberg/matchit'
 
 
 call neobundle#end()
 " If there are uninstalled bundles found on startup,
 "  " this will conveniently prompt you to install them.
 NeoBundleCheck
+
+" undo settings
+if has("persistent_undo")
+  set undodir=~/.vim/undo
+  set undofile
+endif
+set history=1000
+set undolevels=10000
+
 
 let g:neobundle#install_process_timeout = 15000000
 let g:neobundle#log_filename=expand('~/.vim/plugin_install.log') 
@@ -114,6 +124,8 @@ set clipboard=unnamedplus " use the system clipboard when copy
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+set hidden " hide buffer instead of closing it, much faster
 
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
@@ -170,9 +182,14 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " old way JSHint with JSX
-let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
-let g:syntastic_javascript_checkers = ['jsxhint']
-"let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react 
+" let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+" let g:syntastic_javascript_checkers = ['jsxhint']
+
+" npm install -g eslint
+" npm install -g babel-eslint
+" npm install -g eslint-plugin-react
+" .eslintrc 
+let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react 
 
 " recommended settings for syntastic
 set statusline+=%#warningmsg#
@@ -199,8 +216,32 @@ let g:airline#extensions#tabline#enabled = 1
 
 au BufRead,BufNewFile *.md set filetype=markdown
 
-set hlsearch
+" Highlight searches 
+set hlsearch 
 set incsearch
+
+set visualbell           " don't beep
+set noerrorbells         " don't beep
+
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+
+" When opening a new line and no filetype-specific indenting is enabled, keep
+" the same indent as the line you're currently on. Useful for READMEs, etc.
+set autoindent
+ 
+" Stop certain movements from always going to the first character of a line.
+" While this behaviour deviates from that of Vi, it does what most users
+" coming from other editors would expect.
+set nostartofline
+ 
+" Display the cursor position on the last line of the screen or in the status
+" line of a window
+set ruler
+
+" Better command-line completion
+set wildmenu
 
 set relativenumber
 
@@ -215,3 +256,5 @@ noremap <F3> :TernDef<CR>
 " let g:tern_show_signature_in_pum=1 "  display function signatures in the completion menu
 " let g:tern_show_argument_hints='on_hold'
 
+" Organizing swap files
+set directory^=$HOME/.vim/tmp// " run mkdir -p ~/.vim/tmp
