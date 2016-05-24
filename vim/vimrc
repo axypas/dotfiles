@@ -1,46 +1,46 @@
 " NEO BUNDLE INSTALL
 " Note: Skip initialization for vim-tiny or vim-small.
- if !1 | finish | endif
+if !1 | finish | endif
 
- if has('vim_starting')
-   if &compatible
-     set nocompatible               " Be iMproved
-   endif
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 
-   " Required:
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
- endif
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
- " Required:
- call neobundle#begin(expand('~/.vim/bundle/'))
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
 
- " Let NeoBundle manage NeoBundle
- " Required:
- NeoBundleFetch 'Shougo/neobundle.vim'
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
- " My Bundles here:
- " Refer to |:NeoBundle-examples|.
- " Note: You don't set neobundle setting in .gvimrc!
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
 "NeoBundle 'Shougo/vimproc', { 'build' : {
-    "\       'mac': 'make -f make_mac.mak',
-    "\       'unix' : 'make -f make_unix.mak',
-    "\   },
-    "\}
+"\       'mac': 'make -f make_mac.mak',
+"\       'unix' : 'make -f make_unix.mak',
+"\   },
+"\}
 "NeoBundle 'Shougo/unite.vim', {
-            "\ 'autoload' : {
-            "\   'commands' : [{'name' : 'Unite'},
-            "\       'UniteWithBufferDir']
-            "\   }
-            "\ }
+"\ 'autoload' : {
+"\   'commands' : [{'name' : 'Unite'},
+"\       'UniteWithBufferDir']
+"\   }
+"\ }
 
 " NeoBundleLazy 'junegunn/fzf'
-NeoBundle 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}} 
+NeoBundle 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}}
 NeoBundle 'tacahiroy/ctrlp-funky'
 NeoBundle 'rking/ag.vim'                    " search in local files :Ag
 NeoBundle 'airblade/vim-gitgutter'          " show git changes with signs
 NeoBundle 'tpope/vim-fugitive'
 
-NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight 
+NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight
 " A fork of desert256.vim aims to make it a bit warm and more friendly for
 " my eyes.
 " NeoBundle 'rainux/vim-desert-warm-256'
@@ -53,8 +53,8 @@ NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe', {
       \ 'build'      : {
-         \ 'unix'    : './install.sh ',
-         \ }
+      \ 'unix'    : './install.sh ',
+      \ }
       \ }
 NeoBundle 'scrooloose/syntastic'
 " NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
@@ -74,6 +74,7 @@ NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/ot
 NeoBundle 'mbbill/undotree'
 NeoBundle 'tmhedberg/matchit'
 
+NeoBundle 'Chiel92/vim-autoformat'
 
 call neobundle#end()
 " If there are uninstalled bundles found on startup,
@@ -88,9 +89,12 @@ endif
 set history=1000
 set undolevels=10000
 
+" using Chiel92/vim-autoformat
+noremap <F4> :Autoformat<CR>
+au BufWrite * :Autoformat " code be formatted upon saving your file
 
 let g:neobundle#install_process_timeout = 15000000
-let g:neobundle#log_filename=expand('~/.vim/plugin_install.log') 
+let g:neobundle#log_filename=expand('~/.vim/plugin_install.log')
 let g:neobundle#types#git#enable_submodule = 0
 let g:neobundle#install_max_processes = 4
 
@@ -105,10 +109,10 @@ let g:user_emmet_leader_key='<C-Y>'
 :let mapleader = ","
 "let g:unite_source_file_rec_max_cache_files = 0
 "call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-            "\ 'max_candidates', 0)
+"\ 'max_candidates', 0)
 "
 "" slow to start
-"nnoremap <C-t> :Unite -start-insert file_rec/async<cr> 
+"nnoremap <C-t> :Unite -start-insert file_rec/async<cr>
 
 set backspace=2         " backspace in insert mode works like normal editor
 
@@ -188,8 +192,8 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " npm install -g eslint
 " npm install -g babel-eslint
 " npm install -g eslint-plugin-react
-" .eslintrc 
-let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react 
+" .eslintrc
+let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react
 
 " recommended settings for syntastic
 set statusline+=%#warningmsg#
@@ -216,8 +220,8 @@ let g:airline#extensions#tabline#enabled = 1
 
 au BufRead,BufNewFile *.md set filetype=markdown
 
-" Highlight searches 
-set hlsearch 
+" Highlight searches
+set hlsearch
 set incsearch
 
 set visualbell           " don't beep
@@ -230,12 +234,12 @@ set smartcase
 " When opening a new line and no filetype-specific indenting is enabled, keep
 " the same indent as the line you're currently on. Useful for READMEs, etc.
 set autoindent
- 
+
 " Stop certain movements from always going to the first character of a line.
 " While this behaviour deviates from that of Vi, it does what most users
 " coming from other editors would expect.
 set nostartofline
- 
+
 " Display the cursor position on the last line of the screen or in the status
 " line of a window
 set ruler
@@ -258,3 +262,10 @@ noremap <F3> :TernDef<CR>
 
 " Organizing swap files
 set directory^=$HOME/.vim/tmp// " run mkdir -p ~/.vim/tmp
+
+" automatically leave insert mode after 'updatetime' milliseconds of inaction
+set updatetime=5000
+au CursorHoldI * stopinsert
+
+" automatically refresh any unchanged files
+set autoread
