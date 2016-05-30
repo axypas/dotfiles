@@ -245,6 +245,7 @@ highlight javascriptParens ctermfg=193 guifg=#d7ffaf
 " F3 calls TernDef
 noremap <F3> :TernDef<CR>
 
+map <Esc><Esc> :wa<CR> " press 2 times esc to save all buffers
 
 " let g:tern_show_signature_in_pum=1 "  display function signatures in the completion menu
 " let g:tern_show_argument_hints='on_hold'
@@ -258,3 +259,9 @@ au CursorHoldI * stopinsert
 
 " automatically refresh any unchanged files
 set autoread
+
+nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
+
+nnoremap <Leader>o :CtrlP<CR>
+
+
