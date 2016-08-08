@@ -33,9 +33,12 @@ NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight
 NeoBundle 'sickill/vim-monokai'
 " A slightly-modified desert theme, for 88- and 256-color xterms
 " NeoBundle 'vim-scripts/desert256.vim'
+
+" Javascript
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'mxw/vim-jsx' " Syntax highlighting and indenting for JSX
 NeoBundle 'marijnh/tern_for_vim'
+
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe', {
       \ 'build'      : {
@@ -48,18 +51,29 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-ragtag'
+NeoBundle 'tpope/vim-ragtag' " mappings for html, xml (<C-X>$  <script src='/javascripts/^.js'></script>)
+NeoBundle 'tpope/vim-eunuch' " :Remove, :Rename
+NeoBundle 'tpope/vim-repeat' 
+NeoBundle 'tpope/vim-dispatch'
+
 
 NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'moll/vim-node'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
 NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
+NeoBundle 'tpope/vim-unimpaired'
+
+NeoBundle 'groenewege/vim-less'
 
 " NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'tmhedberg/matchit'
 
+" install for nicer indentation
+" npm install -g js-beautify
+" npm install -g js-beautify
+" sudo apt-get install tidy  for HTML, XHTML and XML
 NeoBundle 'Chiel92/vim-autoformat'
 
 call neobundle#end()
@@ -77,7 +91,7 @@ set undolevels=10000
 
 " using Chiel92/vim-autoformat
 noremap <F4> :Autoformat<CR>
-au BufWrite * :Autoformat " code be formatted upon saving your file
+" au BufWrite * :Autoformat " code be formatted upon saving your file
 
 let g:neobundle#install_process_timeout = 15000000
 let g:neobundle#log_filename=expand('~/.vim/plugin_install.log')
@@ -115,7 +129,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-set hidden " hide buffer instead of closing it, much faster
+" set hidden " hide buffer instead of closing it, much faster
+set autowriteall "automatically save any changes made to the buffer before it is hidden
 
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
@@ -182,6 +197,9 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " npm install -g babel-eslint
 " npm install -g eslint-plugin-react
 " .eslintrc
+let g:syntastic_javascript_eslint_generic = 1
+let g:syntastic_javascript_eslint_exec = 'xo'
+let g:syntastic_javascript_eslint_args = '--reporter=compact'
 let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react
 
 " recommended settings for syntastic
@@ -204,10 +222,11 @@ let g:airline#extensions#tabline#enabled = 1
 :nnoremap <S-PageDown> :bnext<CR>
 :noremap <C-Right> <C-W><Right>
 :noremap <C-Left> <C-W><Left>
-:noremap <F5> :NERDTreeToggle<CR>
+:noremap <F5> :NERDTreeFind<CR>
 
 
 au BufRead,BufNewFile *.md set filetype=markdown
+au BufNewFile,BufRead *.less set filetype=css
 
 " Highlight searches
 set hlsearch
@@ -245,17 +264,20 @@ highlight javascriptParens ctermfg=193 guifg=#d7ffaf
 " F3 calls TernDef
 noremap <F3> :TernDef<CR>
 
-map <Esc><Esc> :wa<CR> " press 2 times esc to save all buffers
+" imap <Esc> <Esc>:wa<CR>   " press 2 times esc to save all buffers 
+" nmap <Esc> :wa<CR> " press 2 times esc to save all buffers 
+
+" map <Esc><Esc> :wa<CR> " press 2 times esc to save all buffers 
+
 
 " let g:tern_show_signature_in_pum=1 "  display function signatures in the completion menu
 " let g:tern_show_argument_hints='on_hold'
 
-" Organizing swap files
-set directory^=$HOME/.vim/tmp// " run mkdir -p ~/.vim/tmp
+set noswapfile
 
 " automatically leave insert mode after 'updatetime' milliseconds of inaction
-set updatetime=5000
-au CursorHoldI * stopinsert
+" set updatetime=5000
+" au CursorHoldI * stopinsert
 
 " automatically refresh any unchanged files
 set autoread
@@ -264,4 +286,7 @@ nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 
 nnoremap <Leader>o :CtrlP<CR>
 
+set mouse=a
 
+set lazyredraw
+set ttyfast
