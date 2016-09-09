@@ -53,9 +53,9 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-ragtag' " mappings for html, xml (<C-X>$  <script src='/javascripts/^.js'></script>)
 NeoBundle 'tpope/vim-eunuch' " :Remove, :Rename
-NeoBundle 'tpope/vim-repeat' 
+NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-dispatch'
-
+NeoBundle 'tpope/vim-abolish' " :Subvert/blog{,s}/post{,s}/g
 
 NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'moll/vim-node'
@@ -91,6 +91,10 @@ set undolevels=10000
 
 " using Chiel92/vim-autoformat
 noremap <F4> :Autoformat<CR>
+" noremap <F2> :silent exec "!xo --fix %" <CR> :w <CR>
+" set verbose=1
+" let g:formatdef_xo = '"xo --fix --stdin"'  " does not seem to work using stdin
+" let g:formatters_javascript = ['xo']
 " au BufWrite * :Autoformat " code be formatted upon saving your file
 
 let g:neobundle#install_process_timeout = 15000000
@@ -208,8 +212,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0 " disable since buffer are written each time bprevious/bnext is called
+let g:syntastic_check_on_wq = 1 " check the file on save
 
 
 "let g:jsx_ext_required = 0 " jsx in js files allowed
@@ -264,10 +268,10 @@ highlight javascriptParens ctermfg=193 guifg=#d7ffaf
 " F3 calls TernDef
 noremap <F3> :TernDef<CR>
 
-" imap <Esc> <Esc>:wa<CR>   " press 2 times esc to save all buffers 
-" nmap <Esc> :wa<CR> " press 2 times esc to save all buffers 
+" imap <Esc> <Esc>:wa<CR>   " press 2 times esc to save all buffers
+" nmap <Esc> :wa<CR> " press 2 times esc to save all buffers
 
-" map <Esc><Esc> :wa<CR> " press 2 times esc to save all buffers 
+" map <Esc><Esc> :wa<CR> " press 2 times esc to save all buffers
 
 
 " let g:tern_show_signature_in_pum=1 "  display function signatures in the completion menu
