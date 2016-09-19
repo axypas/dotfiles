@@ -35,8 +35,9 @@ NeoBundle 'sickill/vim-monokai'
 " NeoBundle 'vim-scripts/desert256.vim'
 
 " Javascript
-NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'mxw/vim-jsx' " Syntax highlighting and indenting for JSX
+NeoBundleLazy 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
+ " Syntax highlighting and indenting for JSX
 NeoBundle 'marijnh/tern_for_vim'
 
 NeoBundle 'SirVer/ultisnips'
@@ -58,6 +59,7 @@ NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-abolish' " :Subvert/blog{,s}/post{,s}/g
 
 NeoBundle 'ternjs/tern_for_vim'
+NeoBundle 'mxw/vim-jsx'
 NeoBundle 'moll/vim-node'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
@@ -91,7 +93,7 @@ set undolevels=10000
 
 " using Chiel92/vim-autoformat
 noremap <F4> :Autoformat<CR>
-" noremap <F2> :silent exec "!xo --fix %" <CR> :w <CR>
+" noremap <F2> :silent exec "!xo --fix --space %" <CR> :w <CR>
 " set verbose=1
 " let g:formatdef_xo = '"xo --fix --stdin"'  " does not seem to work using stdin
 " let g:formatters_javascript = ['xo']
@@ -203,7 +205,7 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " .eslintrc
 let g:syntastic_javascript_eslint_generic = 1
 let g:syntastic_javascript_eslint_exec = 'xo'
-let g:syntastic_javascript_eslint_args = '--reporter=compact'
+let g:syntastic_javascript_eslint_args = '--space --reporter=compact' " instead of adding space, it is better to add it in your project
 let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react
 
 " recommended settings for syntastic
@@ -216,7 +218,7 @@ let g:syntastic_check_on_open = 0 " disable since buffer are written each time b
 let g:syntastic_check_on_wq = 1 " check the file on save
 
 
-"let g:jsx_ext_required = 0 " jsx in js files allowed
+let g:jsx_ext_required = 0 " jsx in js files allowed
 
 
 let g:airline#extensions#tabline#enabled = 1
