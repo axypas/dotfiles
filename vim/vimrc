@@ -65,6 +65,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
 NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
 NeoBundle 'tpope/vim-unimpaired'
+NeoBundleLazy 'flowtype/vim-flow'
 
 NeoBundle 'groenewege/vim-less'
 
@@ -93,7 +94,7 @@ set undolevels=10000
 
 " using Chiel92/vim-autoformat
 noremap <F4> :Autoformat<CR>
-" noremap <F2> :silent exec "!xo --fix --space %" <CR> :w <CR>
+noremap <F2> :exec "!xo --fix %" <CR> :w <CR>
 " set verbose=1
 " let g:formatdef_xo = '"xo --fix --stdin"'  " does not seem to work using stdin
 " let g:formatters_javascript = ['xo']
@@ -206,7 +207,8 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:syntastic_javascript_eslint_generic = 1
 let g:syntastic_javascript_eslint_exec = 'xo'
 let g:syntastic_javascript_eslint_args = '--space --reporter=compact' " instead of adding space, it is better to add it in your project
-let g:syntastic_javascript_checkers = ['eslint'] " https://github.com/jaxbot/syntastic-react
+let g:syntastic_javascript_checkers = ['eslint', 'flow']  " https://github.com/jaxbot/syntastic-react
+let g:syntastic_javascript_flow_exe = 'flow --quiet'
 
 " recommended settings for syntastic
 set statusline+=%#warningmsg#
@@ -291,6 +293,8 @@ set autoread
 nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 
 nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>m :CtrlPMRU<CR>
 
 set mouse=a
 
