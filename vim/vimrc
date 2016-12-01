@@ -39,6 +39,7 @@ NeoBundleLazy 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
  " Syntax highlighting and indenting for JSX
 NeoBundle 'marijnh/tern_for_vim'
+" NeoBundle 'sidorares/node-vim-debugger'
 
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe', {
@@ -177,6 +178,8 @@ endif
 
 let g:ctrlp_match_window = 'results:100' " Display more results
 let g:ctrlp_match_window = 'min:4,max:72'
+
+let g:ctrlp_mruf_relative = 1
 
 " These are the tweaks I apply to YCM's config, you don't need them but they
 " might help.
