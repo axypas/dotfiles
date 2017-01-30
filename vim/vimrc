@@ -226,7 +226,7 @@ let g:syntastic_check_on_wq = 1 " check the file on save
 
 " close syntastic when the buffer is deleted, see faq
 " https://github.com/vim-syntastic/syntastic
-nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+" nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 let g:jsx_ext_required = 0 " jsx in js files allowed
