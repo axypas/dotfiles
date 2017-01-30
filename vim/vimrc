@@ -38,7 +38,7 @@ NeoBundle 'sickill/vim-monokai'
 NeoBundleLazy 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
  " Syntax highlighting and indenting for JSX
-NeoBundle 'marijnh/tern_for_vim'
+" NeoBundle 'marijnh/tern_for_vim'
 " NeoBundle 'sidorares/node-vim-debugger'
 
 NeoBundle 'SirVer/ultisnips'
@@ -59,14 +59,14 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-abolish' " :Subvert/blog{,s}/post{,s}/g
 
-NeoBundle 'ternjs/tern_for_vim'
+" NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'moll/vim-node'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
 NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundleLazy 'flowtype/vim-flow'
+NeoBundle 'flowtype/vim-flow'
 
 NeoBundle 'groenewege/vim-less'
 
@@ -79,6 +79,8 @@ NeoBundle 'tmhedberg/matchit'
 " npm install -g js-beautify
 " sudo apt-get install tidy  for HTML, XHTML and XML
 NeoBundle 'Chiel92/vim-autoformat'
+
+NeoBundleLazy 'suan/vim-instant-markdown'
 
 call neobundle#end()
 " If there are uninstalled bundles found on startup,
@@ -222,15 +224,31 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0 " disable since buffer are written each time bprevious/bnext is called
 let g:syntastic_check_on_wq = 1 " check the file on save
 
+" close syntastic when the buffer is deleted, see faq
+" https://github.com/vim-syntastic/syntastic
+nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 let g:jsx_ext_required = 0 " jsx in js files allowed
 
 
 let g:airline#extensions#tabline#enabled = 1
+"
+"Use locally installed flow
+let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+if matchstr(local_flow, "^\/\\w") == ''
+    let local_flow= getcwd() . "/" . local_flow
+endif
+if executable(local_flow)
+  let g:flow#flowpath = local_flow
+endif
 
+let g:flow#omnifunc = 1
+let g:flow#timeout = 10
+let g:flow#enable = 0
 
-:nnoremap <S-PageUp> :bprevious<CR>
-:nnoremap <S-PageDown> :bnext<CR>
+:nnoremap <C-J> :bprevious<CR>
+:nnoremap <C-K> :bnext<CR>
 :noremap <C-Right> <C-W><Right>
 :noremap <C-Left> <C-W><Left>
 :noremap <F5> :NERDTreeFind<CR>
@@ -272,8 +290,8 @@ highlight javascriptOpSymbols ctermfg=159 guifg=#afffff
 highlight javascriptParens ctermfg=193 guifg=#d7ffaf
 
 
-" F3 calls TernDef
-noremap <F3> :TernDef<CR>
+" F3 calls Flow find definition
+noremap <F3> :FlowJumpToDef<CR>
 
 " imap <Esc> <Esc>:wa<CR>   " press 2 times esc to save all buffers
 " nmap <Esc> :wa<CR> " press 2 times esc to save all buffers
@@ -303,3 +321,7 @@ set mouse=a
 
 set lazyredraw
 set ttyfast
+
+ " If there are uninstalled bundles found on startup,
+ " this will conveniently prompt you to install them.
+ NeoBundleCheck
