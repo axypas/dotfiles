@@ -317,6 +317,9 @@ nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>m :CtrlPMRU<CR>
 
+" Save the file using 2 times the leader
+nnoremap <Leader><Leader> :w<CR> 
+
 set mouse=a
 
 set lazyredraw
