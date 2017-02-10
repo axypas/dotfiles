@@ -25,6 +25,7 @@ NeoBundle 'tacahiroy/ctrlp-funky'
 NeoBundle 'rking/ag.vim'                    " search in local files :Ag
 NeoBundle 'airblade/vim-gitgutter'          " show git changes with signs
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'schickling/vim-bufonly'          " :BufOnly to delete all buffers except the current one (Aliases: :Bonly, :BOnly, :Bufonly)
 
 NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight
 " A fork of desert256.vim aims to make it a bit warm and more friendly for
