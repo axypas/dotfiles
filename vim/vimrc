@@ -42,13 +42,17 @@ NeoBundle 'mxw/vim-jsx'
 " NeoBundle 'marijnh/tern_for_vim'
 " NeoBundle 'sidorares/node-vim-debugger'
 
-NeoBundle 'SirVer/ultisnips'
+" NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe', {
       \ 'build'      : {
       \ 'unix'    : './install.sh ',
       \ }
       \ }
-NeoBundle 'scrooloose/syntastic'
+if has('nvim')
+  NeoBundle 'w0rp/ale'
+else
+  NeoBundle 'scrooloose/syntastic'
+endif
 " NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'elzr/vim-json'
 NeoBundle 'bling/vim-airline'
@@ -61,15 +65,18 @@ NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-abolish' " :Subvert/blog{,s}/post{,s}/g
 
 " NeoBundle 'ternjs/tern_for_vim'
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'moll/vim-node'
+" NeoBundle 'moll/vim-node'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
 NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'flowtype/vim-flow'
+NeoBundle 'flowtype/vim-flow',{
+            \ 'autoload': {
+            \     'filetypes': 'javascript'
+            \ }}
 
 NeoBundle 'groenewege/vim-less'
+" NeoBundle 'Raimondi/delimitMate' " add parenthesis
 
 " NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mbbill/undotree'
@@ -100,8 +107,9 @@ set undolevels=10000
 noremap <F4> :Autoformat<CR>
 noremap <F2> :exec "!xo --fix %" <CR> :w <CR>
 " set verbose=1
-" let g:formatdef_xo = '"xo --fix --stdin"'  " does not seem to work using stdin
-" let g:formatters_javascript = ['xo']
+" let g:formatdef_xo_javascript = '"xo --fix --stdin"'
+" let g:formatters_javascript = ['xo_javascript']
+
 " au BufWrite * :Autoformat " code be formatted upon saving your file
 
 let g:neobundle#install_process_timeout = 15000000
@@ -142,6 +150,7 @@ set expandtab
 
 " set hidden " hide buffer instead of closing it, much faster
 set autowriteall "automatically save any changes made to the buffer before it is hidden
+
 
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
@@ -202,47 +211,53 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
-" old way JSHint with JSX
-" let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
-" let g:syntastic_javascript_checkers = ['jsxhint']
-
 " npm install -g eslint
 " npm install -g babel-eslint
 " npm install -g eslint-plugin-react
 " .eslintrc
-let g:syntastic_javascript_eslint_generic = 1
-let g:syntastic_javascript_eslint_exec = 'xo'
-let g:syntastic_javascript_eslint_args = '--space --reporter=compact' " instead of adding space, it is better to add it in your project
-let g:syntastic_javascript_checkers = ['eslint', 'flow']  " https://github.com/jaxbot/syntastic-react
-let g:syntastic_javascript_flow_exe = 'flow --quiet'
+if has('nvim')
+  " for neoVim of vim 8, ale is faster than syntastic
+  let g:ale_linters = {'javascript': ['xo', 'flow']}
 
-" recommended settings for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0 " disable since buffer are written each time bprevious/bnext is called
-let g:syntastic_check_on_wq = 1 " check the file on save
+  " Write this in your vimrc file
+  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_text_changed = 1
+else
+  let g:syntastic_javascript_eslint_generic = 1
+  let g:syntastic_javascript_eslint_exec = 'xo'
+  let g:syntastic_javascript_eslint_args = '--space --reporter=compact' " instead of adding space, it is better to add it in your project
+  let g:syntastic_javascript_checkers = ['eslint', 'flow']  " https://github.com/jaxbot/syntastic-react
+  " let g:syntastic_javascript_flow_exe = 'flow --quiet'
 
-" close syntastic when the buffer is deleted, see faq
-" https://github.com/vim-syntastic/syntastic
-" nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
-cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
+  " recommended settings for syntastic
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 0 " disable since buffer are written each time bprevious/bnext is called
+  let g:syntastic_check_on_wq = 1 " check the file on save
 
-let g:jsx_ext_required = 0 " jsx in js files allowed
+  " close syntastic when the buffer is deleted, see faq
+  " https://github.com/vim-syntastic/syntastic
+  " nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+  cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
+endif
+
+let g:jsx_ext_required = 1 " jsx in js files allowed
+" Force the filetype for javascript, the vim-jsx modules changes the filetype to be jsx
 
 
 let g:airline#extensions#tabline#enabled = 1
 "
-"Use locally installed flow
-let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
-if matchstr(local_flow, "^\/\\w") == ''
-    let local_flow= getcwd() . "/" . local_flow
-endif
-if executable(local_flow)
-  let g:flow#flowpath = local_flow
-endif
+" "Use locally installed flow
+" let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+" if matchstr(local_flow, "^\/\\w") == ''
+"     let local_flow= getcwd() . "/" . local_flow
+" endif
+" if executable(local_flow)
+"   let g:flow#flowpath = local_flow
+" endif
 
 let g:flow#omnifunc = 1
 let g:flow#timeout = 10
