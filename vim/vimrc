@@ -70,6 +70,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
 NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
 NeoBundle 'tpope/vim-unimpaired'
+NeoBundle "sindresorhus/vim-xo"
 NeoBundle 'flowtype/vim-flow',{
             \ 'autoload': {
             \     'filetypes': 'javascript'
@@ -108,6 +109,7 @@ noremap <F4> :Autoformat<CR>
 noremap <F2> :exec "!xo --fix %" <CR> :w <CR>
 " set verbose=1
 " let g:formatdef_xo_javascript = '"xo --fix --stdin"'
+" let g:autoformat_verbosemode=1
 " let g:formatters_javascript = ['xo_javascript']
 
 " au BufWrite * :Autoformat " code be formatted upon saving your file
@@ -148,8 +150,10 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-" set hidden " hide buffer instead of closing it, much faster
-set autowriteall "automatically save any changes made to the buffer before it is hidden
+set hidden " hide buffer instead of closing it, much faster
+" Use hidden instead of autwriteall because it makes switching buffers to be
+" too slow
+" set autowriteall "automatically save any changes made to the buffer before it is hidden
 
 
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
@@ -244,9 +248,7 @@ else
   cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 endif
 
-let g:jsx_ext_required = 1 " jsx in js files allowed
-" Force the filetype for javascript, the vim-jsx modules changes the filetype to be jsx
-
+let g:jsx_ext_required = 0 " jsx in js files allowed
 
 let g:airline#extensions#tabline#enabled = 1
 "
