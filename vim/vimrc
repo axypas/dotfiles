@@ -1,100 +1,83 @@
-" NEO BUNDLE INSTALL
-" Note: Skip initialization for vim-tiny or vim-small.
-if !1 | finish | endif
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/bundle')
 
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+" Plug 'junegunn/fzf'
+Plug 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}}
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'rking/ag.vim'                    " search in local files :Ag
+Plug 'airblade/vim-gitgutter'          " show git changes with signs
+Plug 'tpope/vim-fugitive'
+Plug 'schickling/vim-bufonly'          " :BufOnly to delete all buffers except the current one (Aliases: :Bonly, :BOnly, :Bufonly)
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-
-" NeoBundleLazy 'junegunn/fzf'
-NeoBundle 'ctrlpvim/ctrlp.vim', {'lazy': 1, 'autoload': {'commands': 'CtrlP', 'mappings': '<c-p>',}}
-NeoBundle 'tacahiroy/ctrlp-funky'
-NeoBundle 'rking/ag.vim'                    " search in local files :Ag
-NeoBundle 'airblade/vim-gitgutter'          " show git changes with signs
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'schickling/vim-bufonly'          " :BufOnly to delete all buffers except the current one (Aliases: :Bonly, :BOnly, :Bufonly)
-
-NeoBundle 'ekalinin/Dockerfile.vim' " docker highlight
+Plug 'ekalinin/Dockerfile.vim' " docker highlight
 " A fork of desert256.vim aims to make it a bit warm and more friendly for
 " my eyes.
-" NeoBundle 'rainux/vim-desert-warm-256'
-NeoBundle 'sickill/vim-monokai'
+" Plug 'rainux/vim-desert-warm-256'
+Plug 'sickill/vim-monokai'
 " A slightly-modified desert theme, for 88- and 256-color xterms
-" NeoBundle 'vim-scripts/desert256.vim'
+" Plug 'vim-scripts/desert256.vim'
 
 " Javascript
-NeoBundleLazy 'pangloss/vim-javascript'
-NeoBundle 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
  " Syntax highlighting and indenting for JSX
-" NeoBundle 'marijnh/tern_for_vim'
-" NeoBundle 'sidorares/node-vim-debugger'
+" Plug 'marijnh/tern_for_vim'
+" Plug 'sidorares/node-vim-debugger'
 
-" NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Valloric/YouCompleteMe', {
-      \ 'build'      : {
-      \ 'unix'    : './install.sh ',
-      \ }
-      \ }
+" Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" Plug 'Valloric/YouCompleteMe', {
+"       \ 'build'      : {
+"       \   'unix'    : './install.sh --tern-completer ',
+"       \ }
+"       \ }
 if has('nvim')
-  NeoBundle 'w0rp/ale'
+  Plug 'w0rp/ale'
 else
-  NeoBundle 'scrooloose/syntastic'
+  Plug 'scrooloose/syntastic'
 endif
-" NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'elzr/vim-json'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-ragtag' " mappings for html, xml (<C-X>$  <script src='/javascripts/^.js'></script>)
-NeoBundle 'tpope/vim-eunuch' " :Remove, :Rename
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-abolish' " :Subvert/blog{,s}/post{,s}/g
+" Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+Plug 'elzr/vim-json'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag' " mappings for html, xml (<C-X>$  <script src='/javascripts/^.js'></script>)
+Plug 'tpope/vim-eunuch' " :Remove, :Rename
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-abolish' " :Subvert/blog{,s}/post{,s}/g
 
-" NeoBundle 'ternjs/tern_for_vim'
-" NeoBundle 'moll/vim-node'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'tpope/vim-commentary' " example gcat -> comment a tag
-NeoBundle 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle "sindresorhus/vim-xo"
-NeoBundle 'flowtype/vim-flow',{
-            \ 'autoload': {
-            \     'filetypes': 'javascript'
-            \ }}
+" Plug 'ternjs/tern_for_vim'
+" Plug 'moll/vim-node'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-commentary' " example gcat -> comment a tag
+Plug 'tpope/vim-jdaddy' " gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
+Plug 'tpope/vim-unimpaired'
+" Plug 'sindresorhus/vim-xo'
+" Plug 'flowtype/vim-flow',{
+"             \ 'autoload': {
+"             \     'filetypes': 'javascript'
+"             \ }}
 
-NeoBundle 'groenewege/vim-less'
-" NeoBundle 'Raimondi/delimitMate' " add parenthesis
+Plug 'groenewege/vim-less'
+" Plug 'Raimondi/delimitMate' " add parenthesis
 
-" NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mbbill/undotree'
-NeoBundle 'tmhedberg/matchit'
+" Plug 'mattn/webapi-vim'
+Plug 'mbbill/undotree'
+Plug 'tmhedberg/matchit'
 
 " install for nicer indentation
 " npm install -g js-beautify
 " npm install -g js-beautify
 " sudo apt-get install tidy  for HTML, XHTML and XML
-NeoBundle 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 
-NeoBundleLazy 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown'
 
-call neobundle#end()
-" If there are uninstalled bundles found on startup,
-"  " this will conveniently prompt you to install them.
-NeoBundleCheck
+" Initialize plugin system
+call plug#end()
 
 " undo settings
 if has("persistent_undo")
@@ -148,7 +131,24 @@ set clipboard=unnamedplus " use the system clipboard when copy
 
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2   " number of spaces in tab when editing
 set expandtab
+"
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 
 set hidden " hide buffer instead of closing it, much faster
 " Use hidden instead of autwriteall because it makes switching buffers to be
@@ -215,17 +215,38 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
 " npm install -g eslint
 " npm install -g babel-eslint
 " npm install -g eslint-plugin-react
 " .eslintrc
 if has('nvim')
   " for neoVim of vim 8, ale is faster than syntastic
-  let g:ale_linters = {'javascript': ['xo', 'flow']}
+  let g:ale_linters = {'javascript': ['eslint', 'flow']}
+  let g:ale_fixers = {
+  \   'javascript': ['prettier'],
+  \   'css': ['prettier'],
+  \}
+  let g:ale_fix_on_save = 1
 
   " Write this in your vimrc file
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 1
+  " Asynchronous Lint Engine (ALE)
+  " Limit linters used for JavaScript.
+  highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+  highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+  let g:ale_sign_error = 'X' " could use emoji
+  let g:ale_sign_warning = '?' " could use emoji
+  let g:ale_statusline_format = ['X %d', '? %d', '']
+  " %linter% is the name of the linter that provided the message
+  " %s is the error or warning message
+  let g:ale_echo_msg_format = '%linter% says %s'
+  " Map keys to navigate between lines with errors and warnings.
+  nnoremap <leader>an :ALENextWrap<cr>
+  nnoremap <leader>ap :ALEPreviousWrap<cr>
 else
   let g:syntastic_javascript_eslint_generic = 1
   let g:syntastic_javascript_eslint_exec = 'xo'
@@ -251,15 +272,19 @@ endif
 let g:jsx_ext_required = 0 " jsx in js files allowed
 
 let g:airline#extensions#tabline#enabled = 1
-"
-" "Use locally installed flow
-" let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
-" if matchstr(local_flow, "^\/\\w") == ''
-"     let local_flow= getcwd() . "/" . local_flow
-" endif
-" if executable(local_flow)
-"   let g:flow#flowpath = local_flow
-" endif
+
+" To work with Coc.nvim
+" let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+" let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
+"Use locally installed flow
+let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+if matchstr(local_flow, "^\/\\w") == ''
+    let local_flow= getcwd() . "/" . local_flow
+endif
+if executable(local_flow)
+  let g:flow#flowpath = local_flow
+endif
 
 let g:flow#omnifunc = 1
 let g:flow#timeout = 10
@@ -345,4 +370,4 @@ set ttyfast
 
  " If there are uninstalled bundles found on startup,
  " this will conveniently prompt you to install them.
- NeoBundleCheck
+ " NeoBundleCheck
